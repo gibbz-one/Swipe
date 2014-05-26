@@ -99,6 +99,10 @@ function Swipe(container, options) {
     else if (index < slides.length - 1) slide(index+1);
 
   }
+  
+  function clearAutoScrollInterval(){
+      if(interval) clearTimeout(interval);
+  }
 
   function circle(index) {
 
@@ -495,6 +499,9 @@ function Swipe(container, options) {
 
       next();
 
+    },
+    clearAutoScrollInterval: function(){
+         clearAutoScrollInterval();
     },
     stop: function() {
 
