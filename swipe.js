@@ -28,7 +28,7 @@ function Swipe(container, options) {
   // quit if no root element
   if (!container) return;
   var element = container.children[0];
-  var slides, slidePos, width, length;
+  var slides, slidePos, width, length, hasFakeSlides;
   options = options || {};
   var index = parseInt(options.startSlide, 10) || 0;
   var speed = options.speed || 300;
@@ -39,6 +39,8 @@ function Swipe(container, options) {
     // cache slides
     slides = element.children;
     length = slides.length;
+    
+    hasFakeSlides =false;
 
     // set continuous to false if only one slide
     if (slides.length < 2) options.continuous = false;
@@ -48,6 +50,7 @@ function Swipe(container, options) {
       element.appendChild(slides[0].cloneNode(true));
       element.appendChild(element.children[1].cloneNode(true));
       slides = element.children;
+      hasFakeSlides =true;
     }
 
     // create an array to store current positions of each slide
@@ -502,6 +505,9 @@ function Swipe(container, options) {
     },
     clearAutoScrollInterval: function(){
          clearAutoScrollInterval();
+    },
+    hasFakeSlides: function(){
+        return hasFakeSlides;
     },
     stop: function() {
 
